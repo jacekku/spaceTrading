@@ -1,9 +1,11 @@
 function mouseMoved(event){
-    mouseX=0
-    mouseY=0
+    mouseX=event.layerX
+    mouseY=event.layerY
+    console.log(mouseX,mouseY);
 }
 function mouseClicked(event){
-
+    
+    
 }
 function keyPressed(event){
 

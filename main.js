@@ -14,7 +14,6 @@ function start() {
 }
 
 function tick() {
-    console.log(mouseX,mouseY);
     
     if(running)requestAnimationFrame(draw)
 }
@@ -24,7 +23,8 @@ function draw(){
     tick()
 }
 function addEventListeners(){
-    cvs.addEventListener("click",mouseMoved)
+    cvs.addEventListener("click",mouseClicked)
+    cvs.addEventListener("mousemove",mouseMoved)
 }
 
 window.addEventListener("load", start)
