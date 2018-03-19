@@ -1,0 +1,35 @@
+SPACE TRADING GAME
+
+you buy goods on one planet and sell them on other
+inspiration:
+    Endless Sky
+    
+basic game loop:
+    Planet view:
+        Trading view(list of items):
+            list of items to buy and sell
+        Ship upgrade view(list of items):
+            only in some places like space shipyards
+            buying upgrades to your ship
+        Space hub view(2D map to walk around):
+            quest givers and takers appear here
+        
+    Star system view(2D Map):
+        fly from planet to planet in one system
+            this can be a way for new players to earn money
+            upgrading your ship with powerful engines to travel between stars
+        basic quests
+            take this here,bring me this from there
+    
+    Interstar view:
+        fly from one star system to another and trade goods
+
+    Company management view:
+        manage your company
+            hire pilots and give them routes
+            pay pilots 
+            hire guards to 
+
+
+features:
+    ability to buy pilots to fly for you
