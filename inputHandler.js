@@ -1,6 +1,7 @@
 function mouseMoved(event){
     mouseX=event.layerX
     mouseY=event.layerY
+    
 }
 function mouseClicked(event){
 
