@@ -1,24 +1,21 @@
 class Player {
     constructor(x, y, direction) {
-        this.x = x
-        this.y = y
+        this.position=new Vector2D(x,y)
+        this.destination=new Vector2D(this.position.x,this.position.y)
         this.direction = direction
-        this.maxSpeed = 0.1
+        this.maxSpeed = 0.5
         this.velocity = 0.0
-        this.baseAcceleration = 0.01
-        this.destination={x:this.x,y:this.y}
+        this.baseAcceleration = 0.1
     }
 
 
-    setDestination(x_,y_){
-        this.destination={x:x_,y:y_}
+    setDestination(x,y){
+        this.destination.set(x,y)
+        
     }
     move() {
-        // this.x += -(this.x-this.destination.x)*this.velocity 
-        // this.y += -(this.y-this.destination.y)*this.velocity
-        this.x += -Math.cos(this.direction)*this.velocity
-        this.y += -Math.sin(this.direction)*this.velocity
-        console.log(Math.cos(this.direction),Math.sin(this.direction));
+        if(this.position.equals(this.destination))return false
+        this.position=this.position.moveTowards(this.destination,1)
         
         return true
     }
@@ -28,14 +25,14 @@ class Player {
         return true
     }
     speedUp(acceleration = this.baseAcceleration) {
-        if (this.velocity + acceleration >= this.maxSpeed) return false
+        if (this.velocity + acceleration > this.maxSpeed) return false
         this.velocity += acceleration
         return true
     }
 
     show() {
         c.save()
-        c.translate(this.x, this.y)
+        c.translate(this.position.x, this.position.y)
         c.rotate(this.direction)
         rect(-2, -10, 4, 5, "white")
         rect(-5, -5, 10, 10, "white")

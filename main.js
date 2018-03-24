@@ -14,15 +14,13 @@ function start() {
     tick()
 }
 function reset(){
-    player.x=WIDTH/2
-    player.y=HEIGHT/2
+    player.position.set(WIDTH/2,HEIGHT/2)
 }
 function tick() {
-    
     if(mouseIsClicked){
         player.setDestination(mouseX,mouseY)
-        player.speedUp()
-        player.rotate(-Math.atan2(player.x-mouseX,player.y-mouseY))
+        // player.speedUp()
+        player.rotate(-Math.atan2(player.position.x-mouseX,player.position.y-mouseY))
     }
     player.move()
     if(running)requestAnimationFrame(draw)
@@ -34,7 +32,6 @@ function draw(){
     tick()
 }
 function addEventListeners(){
-    // cvs.addEventListener("click",mouseClicked)
     cvs.addEventListener("mousedown",mouseDown)
     cvs.addEventListener("mouseup",mouseUp)
     cvs.addEventListener("mousemove",mouseMoved)
