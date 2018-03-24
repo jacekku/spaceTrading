@@ -1,7 +1,7 @@
 let cvs, c
 const WIDTH = 800,
     HEIGHT = 800
-let mouseX,mouseY
+let mouseX,mouseY,mouseIsClicked
 let running=false
 let player=new Player(400,400,0)
 function start() {
@@ -13,15 +13,18 @@ function start() {
     addEventListeners()
     tick()
 }
-
+function reset(){
+    player.x=WIDTH/2
+    player.y=HEIGHT/2
+}
 function tick() {
-   console.log(
-       Math.atan2(player.x-mouseX,player.y-mouseY)
-       *
-       -(180/Math.PI)
-        
-    )
-    player.direction=-Math.atan2(player.x-mouseX,player.y-mouseY)
+    
+    if(mouseIsClicked){
+        player.setDestination(mouseX,mouseY)
+        player.speedUp()
+        player.rotate(-Math.atan2(player.x-mouseX,player.y-mouseY))
+    }
+    player.move()
     if(running)requestAnimationFrame(draw)
 }
 
@@ -31,11 +34,13 @@ function draw(){
     tick()
 }
 function addEventListeners(){
-    cvs.addEventListener("click",mouseClicked)
+    // cvs.addEventListener("click",mouseClicked)
+    cvs.addEventListener("mousedown",mouseDown)
+    cvs.addEventListener("mouseup",mouseUp)
     cvs.addEventListener("mousemove",mouseMoved)
-    cvs.addEventListener("keypress",keyPress)
-    cvs.addEventListener("keyup",keyUp)
-    cvs.addEventListener("keydown",keyDown)
+    window.addEventListener("keypress",keyPress)
+    window.addEventListener("keyup",keyUp)
+    window.addEventListener("keydown",keyDown)
 }
 
 window.addEventListener("load", start)
