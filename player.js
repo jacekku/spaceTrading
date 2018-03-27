@@ -32,7 +32,7 @@ class Player {
 
     show() {
         c.save()
-        c.translate(this.position.x, this.position.y)
+        c.translate(WIDTH/2, HEIGHT/2)
         c.rotate(this.direction)
         rect(-2, -10, 4, 5, "white")
         rect(-5, -5, 10, 10, "white")
