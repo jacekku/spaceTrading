@@ -1,39 +1,24 @@
-class Planet{
-    constructor(x,y,size,type){
-        this.x=x
-        this.y=y
-        this.size=size
-        this.type=type
-        this.rotation=0
-        this.rotationSpeed=0.005
-        this.moon=null
-        this.color=this.type=="planet"?"green":"gray"
+class Planet {
+    constructor(x, y, size, type) {
+        this.x = x
+        this.y = y
+        this.size = size
+        this.type = type
+        this.rotation = 0
+        this.rotationSpeed = 0.005
+        this.color = this.type == "planet" ? "#1f1" : "gray"
     }
-    show(){
-        if(this.type=="moon"){
-            c.fillStyle=this.color
-            c.beginPath()
-            c.ellipse(this.size*10,0,this.size,this.size,0,0,Math.PI*2)
-            c.fill()
-        }
-        else{
+    show() {
         c.save()
-        c.translate(this.x-canvasScroll.x,this.y-canvasScroll.y)
+        c.translate(this.x - canvasScroll.x, this.y - canvasScroll.y)
         c.rotate(this.rotation)
-        c.fillStyle=this.color
-        c.beginPath()
-        c.ellipse(0,0,this.size,this.size,0,0,Math.PI*2)
-        c.fill()
-        //  rect(-this.size/2,-this.size/2,this.size,this.size,"green")
-        if(this.moon)this.moon.show()
+        fillEllipse(0,0,this.size,this.size,this.color)
         c.restore()
-        }
-        
     }
-    rotate(){
-        this.rotation+=this.rotationSpeed
+    mapShow(){
+        fillEllipse(this.x/10,this.y/10,this.size/10,this.size/10,this.color)
     }
-    createMoon(x,y,size,type){
-        this.moon=new Planet(this.x-x,this.y-y,size,type)
+    rotate() {
+        this.rotation += this.rotationSpeed
     }
 }
