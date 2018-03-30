@@ -38,4 +38,10 @@ class Player {
         rect(-5, -5, 10, 10, "white")
         c.restore()
     }
+    mapShow(){
+        rect(player.destination.x/10,player.destination.y/10,2,2,"#00f")
+        rect(player.position.x/10,player.position.y/10,2,2,"#f00")
+        
+
+    }
 }
