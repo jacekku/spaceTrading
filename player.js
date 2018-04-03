@@ -3,7 +3,7 @@ class Player {
         this.position=new Vector2D(x,y)
         this.destination=new Vector2D(this.position.x,this.position.y)
         this.direction = direction
-        this.maxSpeed = 0.5
+        this.maxSpeed = 10
         this.velocity = 0.0
         this.baseAcceleration = 0.1
     }
@@ -15,7 +15,7 @@ class Player {
     }
     move() {
         if(this.position.equals(this.destination))return false
-        this.position=this.position.moveTowards(this.destination,1)
+        this.position=this.position.moveTowards(this.destination,this.maxSpeed)
         
         return true
     }
