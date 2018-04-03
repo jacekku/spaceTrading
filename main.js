@@ -5,10 +5,15 @@ let mouseX, mouseY, mouseIsClicked, mapIsOpened
 let running = false
 let player = new Player(4000, 4000, 0)
 let canvasScroll = new Vector2D(0, 0)
-let planets = Array.from({length:10},p=>new Planet(Math.round(Math.random()*WIDTH*10), Math.round(Math.random()*HEIGHT*10), 120, "planet"))
-planets[0].x=4000
-planets[0].y=4000
+let tickCounter=0
 
+stars=[]
+stars[0]=new Star(4000,4000,500)
+star1=stars[0]
+planet1=new Planet(6000,4000,200)
+star1.addPlanet(planet1)
+moon1=new Moon(5500,4000,50)
+planet1.addMoon(moon1)
 
 
 function start() {
@@ -27,36 +32,36 @@ function reset() {
 }
 
 function tick() {
+    
     if (mouseIsClicked) {
         let mouseOffset=new Vector2D(mouseX + canvasScroll.x,mouseY + canvasScroll.y)
         if(mapIsOpened)mouseOffset=new Vector2D((mouseX)*10,(mouseY)*10)
-        
         player.setDestination(mouseOffset.x, mouseOffset.y)
         player.rotate(-Math.atan2(player.position.x - mouseOffset.x, player.position.y - mouseOffset.y))
     }
+
+
+    for (const star of stars) {star.physics(tickCounter/500)}
+    
+
+
     player.move()
     
     canvasScroll.set(player.position.x - WIDTH / 2, player.position.y - HEIGHT / 2)
+    tickCounter++
     if (running) requestAnimationFrame(draw)
 }
 
 function draw() {
     rect(0, 0, WIDTH, HEIGHT, "#000")
 
-    for (let planet of planets) {
-        if(planet.x<player.position.x+WIDTH
-         &&planet.x>player.position.x-WIDTH
-         &&planet.y<player.position.y+WIDTH
-         &&planet.y>player.position.y-WIDTH)
-        planet.show()
-    }
+    for (const star of stars) {star.show()}
 
     player.show()
     if (mapIsOpened) {
         drawMap()
     }
     c.fillStyle="#0f0"
-    c.fillText(`${player.destination.x} y:${player.destination.y}`,0,10)
 
     tick()
 }
